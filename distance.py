@@ -15,10 +15,10 @@ vitebsk = {lat : radians(55.1904), long : radians(30.2049)}
 #  формула расстояний  6371.01 * acos(sin(lat1) * sin(lat2) + cos(lat1) * cos(lat2) * cos(long1 - long2))
 
 distances = {}
-cities = ['gomel', 'mogilev', 'minsk', 'grodno', 'brest', 'vitebsk']
+cities = [gomel, mogilev, minsk, grodno, brest, vitebsk]
 
 print(len(cities))
 
 for x in range (len(cities)):
-    
+
     distances[cities[x]] = x
