@@ -1,8 +1,9 @@
+
 from math import radians, sin, cos, acos
 
 def calculate (lat1, long1, lat2, long2):
     dist = 6371.01 * acos(sin(lat1) * sin(lat2) + cos(lat1) * cos(lat2) * cos(long1 - long2))
-    return dist
+    return int(dist)
 
 
 gomel = {'lat' : radians(52.4345), 'long' : radians(30.9754), 'name' : 'gomel'}
@@ -12,12 +13,16 @@ grodno = {'lat' : radians(53.6685), 'long' : radians(23.81364), 'name' : 'grodno
 brest = {'lat' : radians(52.0976), 'long' : radians(23.7341), 'name' : 'brest'}
 vitebsk = {'lat' : radians(55.1904), 'long' : radians(30.2049), 'name' : 'vitebsk'}
 
-#  формула расстояний  6371.01 * acos(sin(lat1) * sin(lat2) + cos(lat1) * cos(lat2) * cos(long1 - long2))
-
 distances = {}
+goroda = {}
 cities = [gomel, mogilev, minsk, grodno, brest, vitebsk]
 
-print(len(cities))
 
 for x in range (len(cities)):
-    print(cities[x].get('name'))
+    for i in range (len(cities)): 
+        if cities[x].get('name') != cities[i].get('name') :
+            goroda[cities[i].get('name')] = calculate(cities[x].get('lat'), cities[x].get('long'), cities[i].get('lat'), cities[i].get('long') )
+        distances[cities[x].get('name')] = goroda
+    goroda = {}
+      
+print(distances)
