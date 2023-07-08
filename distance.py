@@ -20,9 +20,35 @@ cities = [gomel, mogilev, minsk, grodno, brest, vitebsk]
 
 for x in range (len(cities)):
     for i in range (len(cities)): 
-        if cities[x].get('name') != cities[i].get('name') :
-            goroda[cities[i].get('name')] = calculate(cities[x].get('lat'), cities[x].get('long'), cities[i].get('lat'), cities[i].get('long') )
+        goroda[cities[i].get('name')] = calculate(cities[x].get('lat'), cities[x].get('long'), cities[i].get('lat'), cities[i].get('long') )
         distances[cities[x].get('name')] = goroda
     goroda = {}
-      
-print(distances)
+
+
+
+def print_header(header_data):
+  f.write(f'<table><tbody>')
+  f.write(f'<tr>')
+  f.write(f'<td> ------ </td>')
+  for value in list(header_data):
+    f.write(f'<td>{value}</td>')
+  f.write(f'</tr>')
+
+  print_table(distances)
+
+  f.write(f'</tbody> </table>')
+
+
+def print_table(data):
+    for value in list(data):
+       f.write(f'<tr>')
+       f.write(f'<td>{value}</td>')
+       for i in distances.get(value):
+          f.write(f'<td> {distances.get(value).get(i)} </td>')            
+       f.write(f'</tr>')
+
+
+
+f = open('xyz.html','w')
+print_header(distances)
+f.close()
