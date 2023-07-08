@@ -14,15 +14,16 @@ brest = {'lat' : radians(52.0976), 'long' : radians(23.7341), 'name' : 'brest'}
 vitebsk = {'lat' : radians(55.1904), 'long' : radians(30.2049), 'name' : 'vitebsk'}
 
 distances = {}
-goroda = {}
 cities = [gomel, mogilev, minsk, grodno, brest, vitebsk]
 
 
-for x in range (len(cities)):
-    for i in range (len(cities)): 
-        goroda[cities[i].get('name')] = calculate(cities[x].get('lat'), cities[x].get('long'), cities[i].get('lat'), cities[i].get('long') )
-        distances[cities[x].get('name')] = goroda
-    goroda = {}
+for x in cities:
+    distances[x.get('name')] = {}
+    for i in cities: 
+        distances[x.get('name')][i.get('name')] = calculate(x.get('lat'), x.get('long'), i.get('lat'), i.get('long') )
+    print(distances[x.get('name')])
+    
+    
 
 
 
@@ -34,7 +35,7 @@ def print_header(header_data):
     f.write(f'<td>{value}</td>')
   f.write(f'</tr>')
 
-  print_table(distances)
+  print_table(header_data)
 
   f.write(f'</tbody> </table>')
 
@@ -43,8 +44,8 @@ def print_table(data):
     for value in list(data):
        f.write(f'<tr>')
        f.write(f'<td>{value}</td>')
-       for i in distances.get(value):
-          f.write(f'<td> {distances.get(value).get(i)} </td>')            
+       for i in data.get(value):
+          f.write(f'<td> {data.get(value).get(i)} </td>')            
        f.write(f'</tr>')
 
 
